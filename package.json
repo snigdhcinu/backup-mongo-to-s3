@@ -1,0 +1,16 @@
+{
+  "name": "backup-mongo-to-s3",
+  "version": "1.0.0",
+  "description": "Make mongo db backup to s3",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Snigdh Shourya",
+  "license": "ISC",
+  "dependencies": {
+    "archiver": "^5.3.1",
+    "aws-sdk": "^2.1185.0",
+    "moment": "^2.29.4"
+  }
+}
