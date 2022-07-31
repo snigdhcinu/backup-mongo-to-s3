@@ -1,6 +1,6 @@
 const main  = require ('./src/make-db-backup');
-const log   = require ('./log');
-const store = require ('./store');
+const log   = require ('./utils/log');
+const store = require ('./utils/store');
 
 let config    = {};
 let module    = {};

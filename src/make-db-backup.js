@@ -1,6 +1,6 @@
 const fs         = require ('fs');
 const aws        = require ('aws-sdk');
-//const log        = require ('../log');
+const log        = require ('./store/log');
 const exec       = require ('child_process').exec;
 const util       = require ('util');
 const moment     = require ('moment');
@@ -36,8 +36,7 @@ const makeDbBackup = async (metaInfo) => {
 		await deleteCloudBackups (config, s3);
 	}
 	catch (err) {
-		console.error ({err}, "error in make-and-upload backup process");
-		//log.error ({err}, "error in make-and-upload backup process");
+		log.error ({err}, "error in make-and-upload backup process");
 		await deleteLocalBackup (null, config);
 	}
 };
@@ -97,8 +96,7 @@ const uploadLocalBackup = async (config, s3) => {
 			ACL    : 'private', // list here : https://docs.aws.amazon.com/AmazonS3/latest/userguide/acl-overview.html
 		};
 		await uploadBackup (params, s3);
-		console.log ('backup upload ok');
-		//log.info ('backup upload ok');
+		log.info ('backup upload ok');
 
 	}
 	catch (error) {
@@ -110,8 +108,7 @@ const uploadBackup = (params, s3) => {
 	return new Promise ( (resolve, reject) => {
 		s3.putObject(params, function (err, result) {
 			if (err) {
-				console.error ({err : err}, 'backup upload error');
-				//log.error ({err : err}, 'backup upload error');
+				log.error ({err : err}, 'backup upload error');
 				return reject (err);
 			}
 
@@ -124,10 +121,8 @@ const deleteLocalBackup = async (mode, config) => {
 	// TODO : keep zip only.
 
 	if (config.keepLocalBackups) {
-		console.log ("Retaining local backups.");
-		//log.info ("Retaining local backups.");
-		console.log ("NOTE : No auto delete of local backups, need to do it manually.");
-		//log.warn ("NOTE : No auto delete of local backups, need to do it manually.");
+		log.info ("Retaining local backups.");
+		log.warn ("NOTE : No auto delete of local backups, need to do it manually.");
 
 		return;
 	}
@@ -143,14 +138,12 @@ const deleteLocalBackup = async (mode, config) => {
 					recursive  : true,
 					retryDelay : 100,
 				});
-				console.log ("backup directory delete ok");
-				//log.info ("backup directory delete ok");
+				log.info ("backup directory delete ok");
 				break;
 
 			case 'zip':
 				await rm (config.zipPath);
-				console.log ("backup zip delete ok");
-				//log.info ("backup zip delete ok");
+				log.info ("backup zip delete ok");
 				break;
 
 			default:
@@ -160,8 +153,7 @@ const deleteLocalBackup = async (mode, config) => {
 					retryDelay : 100,
 				});
 				await rm (config.zipPath);
-				console.log ("backup directory and zip delete ok");
-				//log.info ("backup directory and zip delete ok");
+				log.info ("backup directory and zip delete ok");
 		}
 
 	}
@@ -191,8 +183,7 @@ const listObjects = (params, s3) => {
 	return new Promise ( (resolve, reject) => {
 		s3.listObjects (params, (err, data) => {
 			if (err) {
-				console.error ({err}, "error listing objects in bucket");
-				//log.error ({err}, "error listing objects in bucket");
+				log.error ({err}, "error listing objects in bucket");
 				return reject (err);
 			}
 
@@ -214,13 +205,11 @@ const deleteObjects = (config, s3, contents) => {
 
 			s3.deleteObject (params, (err, data) => {
 				if (err) {
-					console.error ({err}, "error deleting objects in bucket");
-					//log.error ({err}, "error deleting objects in bucket");
+					log.error ({err}, "error deleting objects in bucket");
 					return reject (err);
 				}
 
-				console.log ({params}, 'delete ancient object ok');
-				//log.info ({params}, 'delete ancient object ok');
+				log.info ({params}, 'delete ancient object ok');
 			});
 		});
 		resolve ();
