@@ -20,7 +20,7 @@ A module that makes database backup and uploads to s3.
 * ***region***           : MANDATORY | <string>    | e.g. 'us-southwest-01'                   => the region name of the s3 bucket. 
 * ***bucket***           : MANDATORY | <string>    | e.g. 'scheduled-backups'                 => The name of the bucket, where backup zips will be posted to.
 * ***dir***              : MANDATORY | <string>    | e.g. 'backupDir'                         => The directory in the bucket, where zips are stored into.
-* ***name***             : MANDATORY | <string>    | e.g. 'backup-2022-08-16:11:38-GMT+5.30'  => The alias with which we want to store our backup.zip by.
+* ***name***             : OPTIONAL  | <string>    | default : 'backup'                       => The alias with which we want to store our backup.zip by.
 * ***debugMode***        : OPTIONAL  | <boolean>   | default : false                          => Enable logs from module, if false, module simply throws.
 * ***keepLocalBackups*** : OPTIONAL  | <boolean>   | default : false                          => retain or delete localBackup.
 * ***noOfTotalBackups*** : OPTIONAL  | <number>    | default : 7                              => The no. of latest n-backup to keep, older ones are automatically deleted.
