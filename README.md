@@ -38,7 +38,7 @@ This module involves the following steps.
 # EXAMPLE
 
 ```
-const module = require ('module-name');
+const module = require ('backup-mongo-to-s3');
 
 // Take note of the MANDATORY and OPTIONAL parameters.
 const config = {
