@@ -1,6 +1,15 @@
 # backup-mongo-to-s3
 A module that makes database backup and uploads to s3.
 
+# INTRODUCTION
+
+This module involves the following steps.
+1. Make DB backup on disk.
+2. Make a zip file out of localbackup.
+3. Delete the local-backup directory.
+4. Upload the zip file to s3.
+5. Delete zip file, if '***keepLocalBackups***' parameter is not set to true.
+6. Delete outdated cloud backup zip files, outdated refers to zip files older than the latest '***noOfTotalBackups***'.
 
 # USAGE
 
