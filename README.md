@@ -24,3 +24,33 @@ A module that makes database backup and uploads to s3.
 * ***debugMode***        : OPTIONAL  | <boolean>   | default : false                          => Enable logs from module, if false, module simply throws.
 * ***keepLocalBackups*** : OPTIONAL  | <boolean>   | default : false                          => retain or delete localBackup.
 * ***noOfTotalBackups*** : OPTIONAL  | <number>    | default : 7                              => The no. of latest n-backup to keep, older ones are automatically deleted.
+
+
+# EXAMPLE
+
+```
+const module = require ('module-name');
+
+// Take note of the MANDATORY and OPTIONAL parameters.
+const config = {
+		mongodbUri       : <string>,
+		backupDir        : <string>,
+		zipPath          : <string>,
+		keepLocalBackups : <boolean>,
+		noOfTotalBackups : <number>,
+        debug            : <boolean>,
+
+		s3         : {
+			key     : <string>,
+			secret  : <string>,
+			region  : <string>,
+			bucket  : <string>,
+			name    : <string>,
+			dir     : <string>,
+		},
+	};
+
+module.init (config);
+
+module.start ();
+```
