@@ -20,7 +20,7 @@ This module involves the following steps.
 
 
 # PARAMETERS
-
+```
 * ***mongodbUri***       : MANDATORY | <string>    | e.g. "localhost:27017"
 * ***backupDir***        : MANDATORY | <string>    | e.g. "/tmp/backupDir"                    => The path to the directory, where localDB will be dumped.
 * ***zipPath***          : MANDATORY | <string>    | e.g. '/tmp/backup.zip'                   => The path where the backupDir is zipped to.
@@ -33,6 +33,7 @@ This module involves the following steps.
 * ***debugMode***        : OPTIONAL  | <boolean>   | default : false                          => Enable logs from module, if false, module simply throws.
 * ***keepLocalBackups*** : OPTIONAL  | <boolean>   | default : false                          => retain or delete localBackup.
 * ***noOfTotalBackups*** : OPTIONAL  | <number>    | default : 7                              => The no. of latest n-backup to keep, older ones are automatically deleted.
+```
 
 
 # EXAMPLE
@@ -47,7 +48,7 @@ const config = {
 		zipPath          : <string>,
 		keepLocalBackups : <boolean>,
 		noOfTotalBackups : <number>,
-        debug            : <boolean>,
+		debug            : <boolean>,
 
 		s3         : {
 			key     : <string>,
@@ -59,7 +60,9 @@ const config = {
 		},
 	};
 
+// synchronous method.
 module.init (config);
 
+// asynchronous method.
 module.start ();
 ```
