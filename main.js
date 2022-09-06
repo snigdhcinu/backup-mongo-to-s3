@@ -3,11 +3,11 @@ const log   = require ('./utils/log');
 const store = require ('./utils/store');
 
 let config    = {};
-let module    = {};
+let modulo    = {};
 let errState  = false;
 let debugMode = false;
 
-module.init = (argv) => {
+modulo.init = (argv) => {
 	if (paramsMissing (argv)) {
 		errState = true;
 		return;
@@ -34,7 +34,7 @@ module.init = (argv) => {
 	};
 };
 
-module.start = async () => {
+modulo.start = async () => {
 	if (errState)
 		return;
 
@@ -78,4 +78,4 @@ const paramsMissing = (argv) => {
 	}
 };
 
-module.exports = module;
+module.exports = modulo;
